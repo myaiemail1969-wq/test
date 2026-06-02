@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Aeria runtime artifacts
+03_THE_ARCHIVES/archive_index.db
+03_THE_ARCHIVES/archive_index.db-shm
+03_THE_ARCHIVES/archive_index.db-wal
+05_USER_ADDITIONS/logs/
+
+# Vault — never commit encrypted or plaintext sensitive data
+06_PERSONAL_VAULT/*
+!06_PERSONAL_VAULT/.gitkeep
+
+# Model weights — too large for git
+01_THE_BRAINS/*.gguf
+01_THE_BRAINS/*.bin
+
+# OS noise
+.DS_Store
+Thumbs.db
