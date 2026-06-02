@@ -1,0 +1,411 @@
+=====================================================================
+  PROJECT AERIA — DRIVE SETUP GUIDE
+  Step-by-step from blank drive to working offline AI system
+=====================================================================
+
+WHAT YOU NEED BEFORE YOU START
+───────────────────────────────
+  Hardware:
+    Flash drive — minimum 32 GB, recommended 64 GB or larger
+    ExFAT format (readable on Windows, Linux, and macOS without drivers)
+    A computer WITH internet to do the initial download
+    The target survival machine does NOT need internet
+
+  Drive size planning:
+    Binaries (llamafile + llama-cli)   ~500 MB
+    Small model (2B, fallback)         ~1.5 GB
+    Main model (7B, recommended)       ~4.7 GB
+    Vision model + projector           ~1.8 GB
+    Your document library              up to remaining space
+    ─────────────────────────────────────────────
+    Minimum functional drive           16 GB
+    Comfortable full kit               64 GB
+
+  Software needed on your DOWNLOAD machine only:
+    git        (https://git-scm.com)
+    python 3   (https://www.python.org — 3.10 or newer)
+    pip        (comes with Python)
+
+=====================================================================
+STEP 1 — FORMAT THE DRIVE
+=====================================================================
+
+  Windows:
+    Right-click the drive in File Explorer → Format
+    File system: exFAT
+    Allocation unit: Default
+    Click Start
+
+  Linux:
+    sudo mkfs.exfat /dev/sdX1
+    (replace sdX1 with your actual drive partition — check with lsblk)
+
+  macOS:
+    Open Disk Utility → select drive → Erase
+    Format: ExFAT
+    Click Erase
+
+  After formatting, note the drive path:
+    Windows : D:\  (or whatever letter Windows assigned)
+    Linux   : /mnt/aeria  (or wherever you mounted it)
+    macOS   : /Volumes/AERIA
+
+  For the rest of this guide, DRIVE refers to that path.
+
+=====================================================================
+STEP 2 — GET THE CODE
+=====================================================================
+
+  Open a terminal and run:
+
+    git clone https://github.com/myaiemail1969-wq/test DRIVE/aeria
+    cd DRIVE/aeria
+    git checkout claude/aeria-system-prompt-khwmY
+
+  This creates DRIVE/aeria/ with the full Aeria directory structure.
+
+  Verify it worked — you should see these folders inside DRIVE/aeria/:
+    00_BOOT_SYSTEM/
+    01_THE_BRAINS/
+    02_THE_COUNCIL/
+    03_THE_ARCHIVES/
+    04_THE_SCOUT/
+    05_USER_ADDITIONS/
+    06_PERSONAL_VAULT/
+
+=====================================================================
+STEP 3 — DOWNLOAD THE LLAMAFILE BINARY
+=====================================================================
+
+  llamafile is the server that runs the AI model.
+
+  1. Go to: https://github.com/Mozilla-Ocho/llamafile/releases
+  2. Download the latest "llamafile" file (Linux/Mac) or
+     "llamafile.exe" (Windows)
+     The file is named just "llamafile" with no extension on Linux/Mac.
+
+  3. Place it at:
+       DRIVE/aeria/00_BOOT_SYSTEM/llamafile
+
+  4. On Linux/Mac, make it executable:
+       chmod +x DRIVE/aeria/00_BOOT_SYSTEM/llamafile
+
+=====================================================================
+STEP 4 — DOWNLOAD LLAMA-CLI (OFFLINE FALLBACK)
+=====================================================================
+
+  llama-cli lets you run the AI directly in a terminal without a
+  server — useful on low-resource or unfamiliar hardware.
+
+  1. Go to: https://github.com/ggerganov/llama.cpp/releases
+  2. Download the pre-built binary for your target platform:
+       Linux   → look for "llama-...-bin-ubuntu-x64.zip" or similar
+       Windows → look for "llama-...-bin-win-avx2-x64.zip"
+       macOS   → look for "llama-...-bin-macos-arm64.zip"
+  3. Extract the archive and find the file named "llama-cli"
+     (or "llama-cli.exe" on Windows)
+
+  4. Place it at:
+       Linux   → DRIVE/aeria/00_BOOT_SYSTEM/bin/linux/llama-cli
+       Windows → DRIVE/aeria/00_BOOT_SYSTEM/bin/win/llama-cli.exe
+       macOS   → DRIVE/aeria/00_BOOT_SYSTEM/bin/mac/llama-cli
+
+  5. On Linux/Mac, make it executable:
+       chmod +x DRIVE/aeria/00_BOOT_SYSTEM/bin/linux/llama-cli
+
+  Create the bin subdirectories first if they don't exist:
+    mkdir -p DRIVE/aeria/00_BOOT_SYSTEM/bin/linux
+    mkdir -p DRIVE/aeria/00_BOOT_SYSTEM/bin/win
+    mkdir -p DRIVE/aeria/00_BOOT_SYSTEM/bin/mac
+
+=====================================================================
+STEP 5 — DOWNLOAD LANGUAGE MODELS
+=====================================================================
+
+  Models are large files in GGUF format. Download from Hugging Face
+  (https://huggingface.co). You need at least one model.
+
+  ── RECOMMENDED: Main Council model (7B) ────────────────────────
+  Good balance of intelligence and speed. Needs ~8 GB RAM.
+
+  On Hugging Face, search for:
+    Qwen2.5-7B-Instruct GGUF
+
+  Look for a file named something like:
+    qwen2.5-7b-instruct-q4_k_m.gguf
+  Size: approximately 4.7 GB
+
+  Place it at:
+    DRIVE/aeria/01_THE_BRAINS/qwen2.5-7b-instruct-q4_k_m.gguf
+
+  ── FALLBACK: Small model (2B) ──────────────────────────────────
+  Fast on any hardware including old laptops. Needs ~3 GB RAM.
+
+  On Hugging Face, search for:
+    gemma-2-2b-it GGUF
+
+  Look for a file named something like:
+    gemma-2-2b-it-q4_k_m.gguf
+  Size: approximately 1.5 GB
+
+  Place it at:
+    DRIVE/aeria/01_THE_BRAINS/gemma-2-2b-it-q4_k_m.gguf
+
+  ── NOTES ────────────────────────────────────────────────────────
+  - Always get Q4_K_M or Q5_K_M quantization — best size/quality trade-off
+  - Put ALL models in 01_THE_BRAINS/ — startup.sh finds them automatically
+  - The system prefers Q5_K_M over Q4_K_M and larger models over smaller
+
+=====================================================================
+STEP 6 — DOWNLOAD VISION MODEL (OPTIONAL BUT RECOMMENDED)
+=====================================================================
+
+  Vision models let you analyze photos of wounds, plants, maps,
+  and mechanical parts. The Scout requires TWO files.
+
+  On Hugging Face, search for:
+    moondream2 GGUF
+
+  You need BOTH:
+  1. The main model file:
+       moondream2-text-model-f16.gguf  (or Q4_K_M variant)
+       Place at: DRIVE/aeria/04_THE_SCOUT/
+
+  2. The vision projector file (mmproj):
+       moondream2-mmproj-f16.gguf
+       Place at: DRIVE/aeria/04_THE_SCOUT/
+       (filename must start with "mmproj")
+
+  Combined size: approximately 1.8 GB
+
+  If you want stronger vision analysis, search for:
+    LLaVA-1.5-7B GGUF
+  This needs ~5 GB and is significantly more capable.
+
+=====================================================================
+STEP 7 — INSTALL PYTHON DEPENDENCIES
+=====================================================================
+
+  Only needed on machines where you will index documents.
+  Not needed on the survival machine if you pre-index everything.
+
+    pip install pdfplumber    ← for PDF conversion (recommended)
+
+  Optional:
+    pip install Pillow         ← auto-resizes large images for Scout
+
+  That's it. No other packages are required.
+
+=====================================================================
+STEP 8 — ADD YOUR DOCUMENTS
+=====================================================================
+
+  Place your survival reference library in 03_THE_ARCHIVES/.
+  Subdirectories are fine and encouraged.
+
+  Suggested structure:
+    03_THE_ARCHIVES/
+    ├── medicine/          Emergency medicine, pharmacology, anatomy
+    ├── engineering/       Field manuals, construction, water systems
+    ├── agriculture/       Farming, food preservation, animal husbandry
+    ├── metallurgy/        Blacksmithing, welding, materials
+    ├── energy/            Solar, generators, batteries, fuel
+    └── reference/         General encyclopedias, chemistry, physics
+
+  Good sources for public-domain survival references:
+    - US Army Field Manuals (FM series) — public domain
+    - US Navy Hospital Corpsman Manual — public domain
+    - Where There Is No Doctor (Hesperian) — check license
+    - Merck Manual (older editions) — check license
+    - Project Gutenberg (https://gutenberg.org) — free classics
+    - Standard for Welding (AWS) — check license
+
+  Any combination of PDF, TXT, and MD files works.
+  PDF is fine — the converter handles it in the next step.
+
+=====================================================================
+STEP 9 — CONVERT AND INDEX DOCUMENTS
+=====================================================================
+
+  Run these two commands from the drive:
+
+    cd DRIVE/aeria
+
+    # Convert PDFs to clean plain text (5-20x smaller, better for AI)
+    python3 03_THE_ARCHIVES/convert_to_text.py --root .
+
+    # Build the searchable index
+    python3 03_THE_ARCHIVES/index_archives.py --root .
+
+  These only need to be run once, or when you add new documents.
+  Both are resume-safe — re-running skips unchanged files.
+
+  Large libraries (50+ PDFs) may take 10-30 minutes.
+  Progress is printed to screen and logged to 05_USER_ADDITIONS/logs/.
+
+=====================================================================
+STEP 10 — RUN THE PRE-FLIGHT CHECK
+=====================================================================
+
+  This verifies everything is in place before first boot.
+
+    ./00_BOOT_SYSTEM/setup_check.sh --root .
+
+  You should see mostly [PASS] items.
+  [FAIL] means something critical is missing — fix it before booting.
+  [WARN] means optional capability is missing — system still works.
+
+  To auto-fix script permissions in one shot:
+    ./00_BOOT_SYSTEM/setup_check.sh --root . --fix-perms
+
+  Re-run until you see:
+    "Critical checks passed — system is ready."
+
+=====================================================================
+STEP 11 — FIRST BOOT (SERVER MODE)
+=====================================================================
+
+  Server mode runs the full Council + RAG pipeline.
+  Use this on the workstation (higher-spec machine with GPU).
+
+    cd DRIVE/aeria
+    ./00_BOOT_SYSTEM/startup.sh --root .
+
+  The script will:
+    1. Validate the directory structure
+    2. Auto-select the best available model
+    3. Launch llamafile as a background server on port 8080
+    4. Run a health check until the server is ready
+    5. Print "Boot sequence complete" when done
+
+  Then ask a Council agent a question:
+
+    ./02_THE_COUNCIL/council_invoke.sh \
+      --agent surgeon \
+      --query "How do I treat a deep laceration with no sutures available?"
+
+=====================================================================
+STEP 12 — FIRST BOOT (CLI MODE — LOW-RESOURCE HARDWARE)
+=====================================================================
+
+  CLI mode runs directly in the terminal. No server, no background
+  process. Use this on salvaged or minimal hardware.
+
+  Linux:
+    ./00_BOOT_SYSTEM/start-linux-cli.sh --root .
+
+  Windows:
+    Double-click start-windows.bat
+    Or run from cmd: 00_BOOT_SYSTEM\start-windows.bat
+
+  Select a model from the menu. Type your question at the prompt.
+  Type /bye to exit.
+
+=====================================================================
+STEP 13 — FIRST BOOT (VISION / SCOUT)
+=====================================================================
+
+  Only if you downloaded a vision model in Step 6.
+
+    # Start the vision server on port 8081
+    ./04_THE_SCOUT/start_scout.sh --root .
+
+    # Analyze an image
+    python3 04_THE_SCOUT/scout.py photo.jpg --mode wound
+    python3 04_THE_SCOUT/scout.py plant.jpg --mode plant
+    python3 04_THE_SCOUT/scout.py map.jpg   --mode map
+
+=====================================================================
+STEP 14 — VAULT SETUP (OPTIONAL)
+=====================================================================
+
+  Store encrypted personal and family documents.
+
+    # Initialize the vault (one time)
+    ./06_PERSONAL_VAULT/vault.sh init
+
+    # Encrypt a file and shred the original
+    ./06_PERSONAL_VAULT/vault.sh add ~/my_passwords.txt \
+      --category credentials --shred
+
+    # Decrypt to RAM for reading
+    ./06_PERSONAL_VAULT/vault.sh get my_passwords.txt
+
+    # Clean up decrypted files from RAM
+    ./06_PERSONAL_VAULT/vault.sh wipe-tmp
+
+  Your passphrase is never stored anywhere. Write it on paper and
+  keep it somewhere physically separate from this drive.
+
+=====================================================================
+BEFORE BURNING TO COLD STORAGE (M-DISC OR ARCHIVAL USB)
+=====================================================================
+
+  Run this checklist before committing to write-once media:
+
+    [ ] setup_check.sh --root . passes all critical checks
+    [ ] vault.sh verify  confirms all vault files decrypt correctly
+    [ ] Tested startup.sh on target hardware
+    [ ] Tested council_invoke.sh with a real query
+    [ ] Vault passphrase written on paper, stored separately
+    [ ] Document library reviewed — no sensitive personal data
+        in 03_THE_ARCHIVES/ or 05_USER_ADDITIONS/
+
+=====================================================================
+QUICK REFERENCE — COMMAND SUMMARY
+=====================================================================
+
+  Boot (server):     ./00_BOOT_SYSTEM/startup.sh --root .
+  Boot (CLI Linux):  ./00_BOOT_SYSTEM/start-linux-cli.sh --root .
+  Boot (CLI Win):    00_BOOT_SYSTEM\start-windows.bat
+  Scout boot:        ./04_THE_SCOUT/start_scout.sh --root .
+
+  Ask a question:
+    ./02_THE_COUNCIL/council_invoke.sh --agent surgeon --query "..."
+    ./02_THE_COUNCIL/council_invoke.sh --agent blacksmith --query "..."
+    ./02_THE_COUNCIL/council_invoke.sh --agent engineer --query "..."
+
+  Analyze image:
+    python3 04_THE_SCOUT/scout.py IMAGE.jpg --mode [wound|plant|map|mineral|mechanical|document]
+
+  Add documents and re-index:
+    python3 03_THE_ARCHIVES/convert_to_text.py --root .
+    python3 03_THE_ARCHIVES/index_archives.py --root .
+
+  Vault:
+    ./06_PERSONAL_VAULT/vault.sh [init|add|get|list|verify|wipe-tmp]
+
+  Check system:
+    ./00_BOOT_SYSTEM/setup_check.sh --root .
+
+=====================================================================
+TROUBLESHOOTING
+=====================================================================
+
+  "llamafile exited immediately"
+    → Check 05_USER_ADDITIONS/logs/llamafile_*.log for the error
+    → Most common cause: not enough RAM for the model you selected
+    → Fix: use a smaller model (2B instead of 7B)
+
+  "No .gguf models found"
+    → Confirm model file is in 01_THE_BRAINS/
+    → Confirm filename ends in .gguf
+
+  "RAG: no relevant archive chunks found"
+    → Archives not indexed yet
+    → Run: python3 03_THE_ARCHIVES/index_archives.py --root .
+
+  "Permission denied" on any script
+    → Run: ./00_BOOT_SYSTEM/setup_check.sh --root . --fix-perms
+
+  Council response is wrong or hallucinating
+    → Your document library may not cover that topic
+    → Add relevant reference material to 03_THE_ARCHIVES/ and re-index
+    → Use --no-rag flag to isolate whether the issue is in the model
+      or the retrieved context
+
+  Vision model won't load
+    → Confirm BOTH the main model AND the mmproj file are in 04_THE_SCOUT/
+    → The mmproj filename must begin with "mmproj"
+
+=====================================================================
