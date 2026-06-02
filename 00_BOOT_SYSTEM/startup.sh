@@ -180,18 +180,14 @@ launch_llamafile() {
     echo "$pid" > "$pid_file"
     log_info "llamafile started (PID $pid) — PID saved to $(basename "$pid_file")"
 
-    # Allow up to 5 seconds for the process to stabilise or die cleanly
-    local retries=5
-    while [[ $retries -gt 0 ]]; do
-        sleep 1
-        if ! kill -0 "$pid" 2>/dev/null; then
-            log_error "llamafile exited unexpectedly. Check: $lf_log"
-            exit 1
-        fi
-        retries=$((retries - 1))
-    done
+    # Give the process 2 seconds to fail fast before health check takes over
+    sleep 2
+    if ! kill -0 "$pid" 2>/dev/null; then
+        log_error "llamafile exited immediately. Check: $lf_log"
+        exit 1
+    fi
 
-    log_info "llamafile is running."
+    log_info "llamafile process alive — running health check..."
 }
 
 # ---------------------------------------------------------------------------
@@ -227,8 +223,20 @@ main() {
 
     launch_llamafile "$llamafile_bin" "$model"
 
+    local healthcheck="$AERIA_ROOT/00_BOOT_SYSTEM/healthcheck.sh"
+    if [[ -x "$healthcheck" ]]; then
+        "$healthcheck" \
+            --host    "$LLAMAFILE_HOST" \
+            --port    "$LLAMAFILE_PORT" \
+            --timeout 60 \
+            --log     "$LOG_FILE"
+    else
+        log_warn "healthcheck.sh not found — skipping endpoint verification."
+    fi
+
     log_info "========================================================"
     log_info "Boot sequence complete."
+    log_info "Endpoint: http://$LLAMAFILE_HOST:$LLAMAFILE_PORT"
     log_info "========================================================"
 }
 
