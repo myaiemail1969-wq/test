@@ -83,15 +83,22 @@ parse_args() {
 }
 
 # ---------------------------------------------------------------------------
-# Logging initialisation — must be called after AERIA_ROOT is finalised
+# Logging initialisation — must be called after AERIA_ROOT is finalised.
+# Falls back to /tmp if the source media is read-only (e.g. M-DISC optical).
 # ---------------------------------------------------------------------------
 init_logging() {
+    local ts
+    ts="$(date -u '+%Y%m%d_%H%M%S')"
     LOG_DIR="$AERIA_ROOT/05_USER_ADDITIONS/logs"
-    if ! mkdir -p "$LOG_DIR"; then
-        echo "[ERROR] Cannot create log directory: $LOG_DIR" >&2
-        exit 1
+    if mkdir -p "$LOG_DIR" 2>/dev/null && touch "$LOG_DIR/.write_test" 2>/dev/null; then
+        rm -f "$LOG_DIR/.write_test"
+    else
+        # Source media is read-only — redirect all logs to RAM-backed /tmp
+        LOG_DIR="/tmp/aeria_logs_$ts"
+        mkdir -p "$LOG_DIR"
+        echo "[WARN ] Read-only media detected — logs redirected to $LOG_DIR" >&2
     fi
-    LOG_FILE="$LOG_DIR/session_$(date -u '+%Y%m%d_%H%M%S').log"
+    LOG_FILE="$LOG_DIR/session_$ts.log"
 }
 
 # ---------------------------------------------------------------------------
