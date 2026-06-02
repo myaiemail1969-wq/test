@@ -170,12 +170,10 @@ launch_llamafile() {
     log_info "  Endpoint: http://$LLAMAFILE_HOST:$LLAMAFILE_PORT"
     log_info "  Engine log: $lf_log"
 
-    # VERIFY: confirm --log-disable is the correct flag for your llamafile build
     "$bin" \
         --model   "$model" \
         --host    "$LLAMAFILE_HOST" \
         --port    "$LLAMAFILE_PORT" \
-        --log-disable \
         >> "$lf_log" 2>&1 &
 
     local pid=$!
