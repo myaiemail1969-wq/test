@@ -9,9 +9,12 @@ __pycache__/
 03_THE_ARCHIVES/archive_index.db-wal
 05_USER_ADDITIONS/logs/
 
-# Vault — never commit encrypted or plaintext sensitive data
+# Vault — never commit encrypted data or plaintext sensitive files
+# Scripts and README are safe to track; everything else is not.
 06_PERSONAL_VAULT/*
 !06_PERSONAL_VAULT/.gitkeep
+!06_PERSONAL_VAULT/vault.sh
+!06_PERSONAL_VAULT/VAULT_README.txt
 
 # Model weights — too large for git
 01_THE_BRAINS/*.gguf
