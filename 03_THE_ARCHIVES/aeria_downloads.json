@@ -1,0 +1,130 @@
+[
+  {
+    "category": "medical",
+    "name": "Where There Is No Doctor",
+    "description": "Village health guide — the single most useful book for off-grid medicine",
+    "url": "https://hesperian.org/wp-content/uploads/pdf/en_wtnd_2019/en_wtnd_2019.pdf",
+    "filename": "where_there_is_no_doctor.pdf",
+    "verify": "Check hesperian.org/books-resources if URL fails — they update edition links"
+  },
+  {
+    "category": "medical",
+    "name": "Where There Is No Dentist",
+    "description": "Hesperian Foundation — dental care without professional tools",
+    "url": "https://hesperian.org/wp-content/uploads/pdf/en_wtnd_2019/en_wtnd_dentist_2019.pdf",
+    "filename": "where_there_is_no_dentist.pdf",
+    "verify": "Check hesperian.org/books-resources if URL fails"
+  },
+  {
+    "category": "medical",
+    "name": "A Book for Midwives",
+    "description": "Hesperian Foundation — childbirth without hospital care",
+    "url": "https://hesperian.org/wp-content/uploads/pdf/en_bfm_2013/en_bfm_2013.pdf",
+    "filename": "a_book_for_midwives.pdf",
+    "verify": "Check hesperian.org/books-resources if URL fails"
+  },
+  {
+    "category": "medical",
+    "name": "Grays Anatomy (1918 public domain edition)",
+    "description": "Classic anatomical reference — Project Gutenberg #39784",
+    "url": "https://www.gutenberg.org/files/39784/39784-pdf.pdf",
+    "filename": "grays_anatomy_1918.pdf",
+    "verify": "Stable Gutenberg ID — should not change"
+  },
+  {
+    "category": "survival",
+    "name": "US Army Survival Manual FM 21-76",
+    "description": "Official US Army survival field manual — public domain",
+    "url": "https://fas.org/irp/doddir/army/fm21-76.pdf",
+    "filename": "army_fm21-76_survival.pdf",
+    "verify": "FAS.org mirror — stable but check fas.org/irp/doddir/army/ if 404"
+  },
+  {
+    "category": "survival",
+    "name": "US Army First Aid FM 4-25.11",
+    "description": "Official US Army first aid field manual — public domain",
+    "url": "https://fas.org/irp/doddir/army/fm4-25-11.pdf",
+    "filename": "army_fm4-25-11_first_aid.pdf",
+    "verify": "FAS.org mirror — check fas.org/irp/doddir/army/ if 404"
+  },
+  {
+    "category": "survival",
+    "name": "US Army Water Supply FM 10-52",
+    "description": "Field water supply and purification — public domain",
+    "url": "https://fas.org/irp/doddir/army/fm10-52.pdf",
+    "filename": "army_fm10-52_water_supply.pdf",
+    "verify": "FAS.org mirror"
+  },
+  {
+    "category": "survival",
+    "name": "FEMA Are You Ready Guide",
+    "description": "FEMA comprehensive emergency preparedness guide",
+    "url": "https://www.fema.gov/sites/default/files/2020-11/fema_are-you-ready-guide.pdf",
+    "filename": "fema_are_you_ready.pdf",
+    "verify": "FEMA periodically updates URLs — check fema.gov/emergency-managers/individuals-communities/preparedness if 404"
+  },
+  {
+    "category": "survival",
+    "name": "FEMA Food and Water in an Emergency",
+    "description": "FEMA guide to emergency food and water storage",
+    "url": "https://www.ready.gov/sites/default/files/food_water_in_an_emergency.pdf",
+    "filename": "fema_food_water_emergency.pdf",
+    "verify": "Check ready.gov if URL fails"
+  },
+  {
+    "category": "engineering",
+    "name": "OpenStax University Physics Vol 1",
+    "description": "Free college physics textbook — mechanics, thermodynamics, waves",
+    "url": "https://assets.openstax.org/oscms-prodcms/media/documents/UniversityPhysicsVol1-WEB_7Zesacx.pdf",
+    "filename": "openstax_physics_vol1.pdf",
+    "verify": "OpenStax updates asset URLs with editions — check openstax.org/details/books/university-physics-volume-1"
+  },
+  {
+    "category": "engineering",
+    "name": "OpenStax Chemistry Atoms First",
+    "description": "Free college chemistry textbook",
+    "url": "https://assets.openstax.org/oscms-prodcms/media/documents/ChemistryAtomsFirst2e-WEB_9PEn0Gg.pdf",
+    "filename": "openstax_chemistry.pdf",
+    "verify": "Check openstax.org/details/books/chemistry-atoms-first-2e for current PDF link"
+  },
+  {
+    "category": "medical",
+    "name": "OpenStax Anatomy and Physiology",
+    "description": "Free college anatomy and physiology textbook",
+    "url": "https://assets.openstax.org/oscms-prodcms/media/documents/AnatomyandPhysiology2e-WEB_CrKsM88.pdf",
+    "filename": "openstax_anatomy_physiology.pdf",
+    "verify": "Check openstax.org/details/books/anatomy-and-physiology-2e for current PDF link"
+  },
+  {
+    "category": "engineering",
+    "name": "OpenStax College Physics",
+    "description": "Algebra-based college physics — more accessible than calculus version",
+    "url": "https://assets.openstax.org/oscms-prodcms/media/documents/CollegePhysics2e-WEB_dVFBJlH.pdf",
+    "filename": "openstax_college_physics.pdf",
+    "verify": "Check openstax.org/details/books/college-physics-2e for current PDF link"
+  },
+  {
+    "category": "reference",
+    "name": "CDC NIOSH Pocket Guide to Chemical Hazards",
+    "description": "Chemical hazard reference for 677 chemicals — toxicology, exposure limits",
+    "url": "https://www.cdc.gov/niosh/docs/2005-149/pdfs/2005-149.pdf",
+    "filename": "cdc_niosh_chemical_hazards.pdf",
+    "verify": "Check cdc.gov/niosh/npg if URL fails"
+  },
+  {
+    "category": "reference",
+    "name": "EPA Drinking Water Standards",
+    "description": "National primary and secondary drinking water regulations",
+    "url": "https://www.epa.gov/sites/default/files/2016-06/documents/npwdr_complete_table.pdf",
+    "filename": "epa_drinking_water_standards.pdf",
+    "verify": "Check epa.gov/ground-water-and-drinking-water if URL fails"
+  },
+  {
+    "category": "engineering",
+    "name": "US Army Engineer Field Data FM 5-34",
+    "description": "Field engineering reference — construction, explosives, bridging",
+    "url": "https://fas.org/irp/doddir/army/fm5-34.pdf",
+    "filename": "army_fm5-34_engineer_field_data.pdf",
+    "verify": "FAS.org mirror"
+  }
+]
