@@ -173,8 +173,7 @@ main() {
         --color \
         "${prompt_flag[@]}" \
         -ngl "$GPU_LAYERS" \
-        -i \
-        -r "User:" \
+        --conversation \
         2>&1 | tee "$session_log"
 }
 

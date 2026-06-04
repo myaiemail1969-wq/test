@@ -112,7 +112,7 @@ echo  Ready. Type your question. Ctrl+C or /bye to exit.
 echo ====================================================
 echo.
 
-"%BIN%" -m "!MODEL_PATH!" -c 4096 --color !PROMPT_FLAG! -ngl 99 -i -r "User:"
+"%BIN%" -m "!MODEL_PATH!" -c 4096 --color !PROMPT_FLAG! -ngl 99 --conversation
 
 echo.
 echo  Session ended.
