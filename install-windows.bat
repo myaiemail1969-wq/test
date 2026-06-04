@@ -36,13 +36,13 @@ echo.
 :: ---------------------------------------------------------------------------
 echo [1/7] Checking prerequisites...
 
-SET "MISSING="
+SET MISSING=0
 
 where git >nul 2>&1
 IF ERRORLEVEL 1 (
     echo  [FAIL] git not found.
     echo         Install from: https://git-scm.com/download/win
-    SET "MISSING=1"
+    SET MISSING=1
 ) ELSE (
     FOR /F "tokens=3" %%V IN ('git --version') DO echo  [OK]   git %%V
 )
@@ -51,7 +51,7 @@ where python >nul 2>&1
 IF ERRORLEVEL 1 (
     echo  [FAIL] python not found.
     echo         Install from: https://www.python.org (3.10 or newer)
-    SET "MISSING=1"
+    SET MISSING=1
 ) ELSE (
     FOR /F "tokens=2" %%V IN ('python --version 2^>^&1') DO echo  [OK]   Python %%V
 )
@@ -64,7 +64,7 @@ IF ERRORLEVEL 1 (
     echo  [OK]   curl found
 )
 
-IF DEFINED MISSING (
+IF "%MISSING%"=="1" (
     echo.
     echo  Prerequisites missing. Install them and re-run this script.
     pause
