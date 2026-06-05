@@ -1,0 +1,8 @@
+[autorun]
+label=Project Aeria
+icon=aeria\00_BOOT_SYSTEM\aeria.ico
+action=Start Project Aeria
+open=START_AERIA.bat
+shell\start=Start Project Aeria
+shell\start\command=START_AERIA.bat
+shell=start
