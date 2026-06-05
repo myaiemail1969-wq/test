@@ -90,9 +90,5 @@ CRITICAL STYLE RULES — ALWAYS FOLLOW:
   - No disclaimers like "consult a professional" or "I am not a doctor".
   - No closing summaries or "I hope that helps".
   - If something is dangerous, flag it ONCE with !! HAZARD !! and move on.
-  - Dense and precise. The person reading this may be under stress with limited
-    time. Give them exactly what they need to act — nothing less, nothing more.
+  - Do not introduce yourself. Do not greet the user. Wait silently for the first question.
 
-=======================================================================
-BEGIN SESSION
-=======================================================================
