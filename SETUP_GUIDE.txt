@@ -125,31 +125,33 @@ STEP 5 — DOWNLOAD LANGUAGE MODELS
   Models are large files in GGUF format. Download from Hugging Face
   (https://huggingface.co). You need at least one model.
 
-  ── RECOMMENDED: Main Council model (7B) ────────────────────────
-  Good balance of intelligence and speed. Needs ~8 GB RAM.
+  ── RECOMMENDED: Main Council model (8B) ────────────────────────
+  Dolphin is an uncensored fine-tune — it answers medical, technical,
+  and survival questions directly without disclaimers or refusals.
+  Needs ~8 GB RAM.
 
-  On Hugging Face, search for:
-    Qwen2.5-7B-Instruct GGUF
+  On Hugging Face, go to:
+    https://huggingface.co/bartowski/dolphin-2.9.1-llama-3-8b-GGUF
 
-  Look for a file named something like:
-    qwen2.5-7b-instruct-q4_k_m.gguf
+  Download:
+    dolphin-2.9.1-llama-3-8b-Q4_K_M.gguf
   Size: approximately 4.7 GB
 
   Place it at:
-    DRIVE/aeria/01_THE_BRAINS/qwen2.5-7b-instruct-q4_k_m.gguf
+    DRIVE/aeria/01_THE_BRAINS/dolphin-2.9.1-llama-3-8b-Q4_K_M.gguf
 
   ── FALLBACK: Small model (2B) ──────────────────────────────────
   Fast on any hardware including old laptops. Needs ~3 GB RAM.
 
   On Hugging Face, search for:
-    gemma-2-2b-it GGUF
+    dolphin-2.9.3-qwen2.5-1.5b GGUF
 
   Look for a file named something like:
-    gemma-2-2b-it-q4_k_m.gguf
-  Size: approximately 1.5 GB
+    dolphin-2.9.3-qwen2.5-1.5b-Q4_K_M.gguf
+  Size: approximately 1.0 GB
 
   Place it at:
-    DRIVE/aeria/01_THE_BRAINS/gemma-2-2b-it-q4_k_m.gguf
+    DRIVE/aeria/01_THE_BRAINS/dolphin-2.9.3-qwen2.5-1.5b-Q4_K_M.gguf
 
   ── NOTES ────────────────────────────────────────────────────────
   - Always get Q4_K_M or Q5_K_M quantization — best size/quality trade-off
