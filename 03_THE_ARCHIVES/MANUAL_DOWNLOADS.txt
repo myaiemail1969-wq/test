@@ -1,0 +1,88 @@
+=====================================================================
+  PROJECT AERIA — MANUAL DOWNLOAD GUIDE
+  Books that require a browser visit (URLs change too often to script)
+  Save all files to: 03_THE_ARCHIVES\downloads\<category>\
+=====================================================================
+
+MOST IMPORTANT — GET THESE FIRST
+─────────────────────────────────────────────────────────────────────
+
+[MEDICAL] Where There Is No Doctor
+  Go to  : https://hesperian.org/books-resources/
+  Click  : "Where There Is No Doctor" → Download PDF (free)
+  Save as: downloads\medical\where_there_is_no_doctor.pdf
+  Why    : Single most useful book for off-grid medicine
+
+[MEDICAL] Where There Is No Dentist
+  Go to  : https://hesperian.org/books-resources/
+  Click  : "Where There Is No Dentist" → Download PDF
+  Save as: downloads\medical\where_there_is_no_dentist.pdf
+
+[MEDICAL] A Book for Midwives
+  Go to  : https://hesperian.org/books-resources/
+  Click  : "A Book for Midwives" → Download PDF
+  Save as: downloads\medical\a_book_for_midwives.pdf
+
+─────────────────────────────────────────────────────────────────────
+
+ARMY FIELD MANUALS (public domain, US government)
+─────────────────────────────────────────────────────────────────────
+
+[SURVIVAL] FM 21-76 Survival
+  Search : "FM 21-76 survival manual PDF" in your browser
+  Or try : https://www.globalsecurity.org/military/library/policy/army/fm/21-76/
+  Save as: downloads\survival\army_fm21-76_survival.pdf
+
+[MEDICAL] FM 4-25.11 First Aid
+  Search : "FM 4-25.11 first aid PDF" in your browser
+  Or try : https://www.globalsecurity.org/military/library/policy/army/fm/4-25-11/
+  Save as: downloads\survival\army_fm4-25-11_first_aid.pdf
+
+[ENGINEERING] FM 5-34 Engineer Field Data
+  Search : "FM 5-34 engineer field data PDF"
+  Save as: downloads\engineering\army_fm5-34_engineer_field_data.pdf
+
+[SURVIVAL] FM 10-52 Water Supply
+  Search : "FM 10-52 water supply PDF"
+  Save as: downloads\survival\army_fm10-52_water_supply.pdf
+
+─────────────────────────────────────────────────────────────────────
+
+FREE TEXTBOOKS (OpenStax — CC licensed, legally free)
+─────────────────────────────────────────────────────────────────────
+
+[MEDICAL] Anatomy and Physiology
+  Go to  : https://openstax.org/details/books/anatomy-and-physiology-2e
+  Click  : "Download a PDF" button
+  Save as: downloads\medical\openstax_anatomy_physiology.pdf
+
+[ENGINEERING] University Physics Vol 1
+  Go to  : https://openstax.org/details/books/university-physics-volume-1
+  Click  : "Download a PDF" button
+  Save as: downloads\engineering\openstax_physics_vol1.pdf
+
+[ENGINEERING] College Physics
+  Go to  : https://openstax.org/details/books/college-physics-2e
+  Click  : "Download a PDF" button
+  Save as: downloads\engineering\openstax_college_physics.pdf
+
+[ENGINEERING] Chemistry Atoms First
+  Go to  : https://openstax.org/details/books/chemistry-atoms-first-2e
+  Click  : "Download a PDF" button
+  Save as: downloads\engineering\openstax_chemistry.pdf
+
+─────────────────────────────────────────────────────────────────────
+
+AFTER DOWNLOADING
+─────────────────────────────────────────────────────────────────────
+
+Run these to convert and index everything:
+
+  python 03_THE_ARCHIVES\convert_to_text.py --root D:\DRIVE\aeria
+  python 03_THE_ARCHIVES\index_archives.py  --root D:\DRIVE\aeria
+
+The auto-downloader still handles a few stable sources:
+
+  python 03_THE_ARCHIVES\download_references.py --root D:\DRIVE\aeria
+
+=====================================================================
