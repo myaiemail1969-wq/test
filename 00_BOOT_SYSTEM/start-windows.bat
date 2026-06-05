@@ -57,6 +57,11 @@ GOTO FIND_SMALL
 
 :FIND_LARGE
 FOR /F "delims=" %%F IN ('dir /b /s "%BRAINS%\*.gguf" 2^>nul') DO (
+    echo %%F | findstr /i "dolphin" >nul 2>&1
+    IF NOT ERRORLEVEL 1 IF NOT DEFINED MODEL_PATH SET "MODEL_PATH=%%F"
+)
+IF DEFINED MODEL_PATH GOTO MODEL_FOUND
+FOR /F "delims=" %%F IN ('dir /b /s "%BRAINS%\*.gguf" 2^>nul') DO (
     echo %%F | findstr /i "7b 8b 13b 14b" >nul 2>&1
     IF NOT ERRORLEVEL 1 IF NOT DEFINED MODEL_PATH SET "MODEL_PATH=%%F"
 )
@@ -92,7 +97,7 @@ IF NOT DEFINED MODEL_PATH (
 :: System prompt flag
 :: ---------------------------------------------------------------------------
 SET "PROMPT_FLAG="
-IF EXIST "%PROMPT%" SET "PROMPT_FLAG=-f "%PROMPT%""
+IF EXIST "%PROMPT%" SET PROMPT_FLAG=-f "%PROMPT%"
 
 :: ---------------------------------------------------------------------------
 :: Log directory
@@ -112,7 +117,7 @@ echo  Ready. Type your question. Ctrl+C or /bye to exit.
 echo ====================================================
 echo.
 
-"%BIN%" -m "!MODEL_PATH!" -c 4096 --color !PROMPT_FLAG! -ngl 99 --conversation
+"%BIN%" -m "!MODEL_PATH!" -c 4096 !PROMPT_FLAG! -ngl 99 --conversation
 
 echo.
 echo  Session ended.
