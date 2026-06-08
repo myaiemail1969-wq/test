@@ -3,6 +3,20 @@
   AES-256 Encrypted Document Storage
 =====================================================================
 
+---------------------------------------------------------------------
+DISCLAIMER
+---------------------------------------------------------------------
+Encryption only protects data as well as the passphrase and handling
+behind it. There is no backdoor and no recovery mechanism built into
+this system — if a passphrase is lost or forgotten, the encrypted
+contents are permanently unrecoverable.
+
+This vault is provided "as is," with no warranty. You are responsible
+for choosing a strong, memorable passphrase, storing it safely and
+separately from the drive itself, and testing that encryption and
+decryption both work on your target machines before relying on this
+vault to hold anything you cannot afford to lose.
+
 This directory contains encrypted personal and family documents.
 Files with the .gpg extension are AES-256 encrypted.
 

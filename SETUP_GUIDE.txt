@@ -3,6 +3,21 @@
   Step-by-step from blank drive to working offline AI system
 =====================================================================
 
+─────────────────────────────────────────────────────────────────────
+DISCLAIMER
+─────────────────────────────────────────────────────────────────────
+Project Aeria is a preparedness tool for offline reference and AI
+guidance when no other resources are available. The source material
+and AI-generated guidance it provides may describe procedures with
+real risk attached — medical, chemical, electrical, or structural.
+
+It is provided "as is," with no warranty of accuracy, completeness,
+or fitness for any purpose. Cross-check any procedure against the
+archived source material and your own judgment, especially when
+safer options (trained professionals, proper equipment, controlled
+conditions) are available to you. You assume full responsibility for
+how this system, and the information it provides, is used.
+
 WHAT YOU NEED BEFORE YOU START
 ───────────────────────────────
   Hardware:
